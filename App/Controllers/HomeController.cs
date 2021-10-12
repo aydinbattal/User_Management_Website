@@ -35,7 +35,7 @@ namespace App.Controllers
 
 
             //todo: add user to repo
-            // Repository.AddUser(newUser);
+            Repository.AddUser(newUser);
 
             //todo: show login page
             return View("Login");

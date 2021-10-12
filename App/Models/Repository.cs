@@ -14,7 +14,7 @@ namespace App.Models
             _users = new List<User>();
         }
 
-        public static void AddResponse(User user)
+        public static void AddUser(User user)
         {
             _users.Add(user);
         }
