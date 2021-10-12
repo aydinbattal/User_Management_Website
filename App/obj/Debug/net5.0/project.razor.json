@@ -15644,11 +15644,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "d:\\Enterprise Software\\Assignment1\\App\\Views\\Home\\Privacy.cshtml",
-      "TargetPath": "Views\\Home\\Privacy.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "d:\\Enterprise Software\\Assignment1\\App\\Views\\Home\\Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
       "FileKind": "mvc"

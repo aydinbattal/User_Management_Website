@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using App.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace App.Controllers
 {
@@ -31,13 +32,27 @@ namespace App.Controllers
         [HttpPost]
         public IActionResult SignUp(User newUser)
         {
-            //todo: validate the user input //server side validation
+            //validate the user input
+            foreach (User user in Repository.Users)
+            {
+                if (user.Email == newUser.Email)
+                {
+                    ViewBag.EmailExists = "";
+                    return View("Index");
+                }
 
+            }
 
-            //todo: add user to repo
+            if (newUser.Password != newUser.PasswordConfirmation)
+                ModelState.AddModelError(string.Empty, "The password and its confirmation should be the same");
+
+            if (!ModelState.IsValid)
+                return View("Index");
+
+            //add user to repo
             Repository.AddUser(newUser);
 
-            //todo: show login page
+            //show login page
             return View("Login");
         }
     }

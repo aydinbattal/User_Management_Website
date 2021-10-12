@@ -20,5 +20,6 @@ namespace App.Models
         }
 
         public static IEnumerable<User> Users => _users;
+
     }
 }
