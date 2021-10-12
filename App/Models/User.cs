@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace App.Models
 {
-    public class Signup
+    public class User
     {
         [Required]
         public string FullName { get; set; }

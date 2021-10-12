@@ -29,7 +29,7 @@ namespace App.Controllers
         }
 
         [HttpPost]
-        public IActionResult SignUp(Signup newUser)
+        public IActionResult SignUp(User newUser)
         {
             //todo: validate the user input //server side validation
 
