@@ -23,15 +23,17 @@ namespace App.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult SignUp(Signup newUser)
         {
-            return View();
-        }
+            //todo: validate the user input //server side validation
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+
+            //todo: add user to repo
+            // Repository.AddUser(newUser);
+
+            //todo: show login page
+            return View("Login");
         }
     }
 }
