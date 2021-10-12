@@ -30,6 +30,23 @@ namespace App.Controllers
         }
 
         [HttpPost]
+        public IActionResult Login(User user)
+        {
+            var matchedUser = Repository.Users.FirstOrDefault(x => x.Email == user.Email);
+            if (matchedUser.Password == user.Password)
+            {
+                return RedirectToAction("Dashboard");
+
+            }
+            return View("Login");
+        }
+
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public IActionResult SignUp(User newUser)
         {
             //validate the user input
@@ -53,7 +70,7 @@ namespace App.Controllers
             Repository.AddUser(newUser);
 
             //show login page
-            return View("Login");
+            return RedirectToAction("Login");
         }
     }
 }

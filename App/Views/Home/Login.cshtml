@@ -1,3 +1,19 @@
-@model App.Models.Login;
+@model App.Models.User;
 
 <h2>Login</h2>
+
+@* <div class="alert alert-danger" asp-validation-summary="All"></div> *@
+
+<form asp-action="Login" method="POST">
+    <div class="form-group">
+        <label asp-for="Email">Email</label>
+        <input asp-for="Email" type="email" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password">Password</label>
+        <input asp-for="Password" type="text" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
