@@ -31,7 +31,7 @@ namespace App.Controllers
 
         public IActionResult UserListing()
         {
-            return View();
+            return View(Repository.Users);
         }
 
         public IActionResult SignOut()
@@ -53,11 +53,12 @@ namespace App.Controllers
 
         public IActionResult Dashboard(User matchedUser)
         {
-            if (matchedUser.Email != null)
+            if (matchedUser.Email == null)
             {
-                return View("Dashboard", matchedUser);
+                return RedirectToAction("Login");
             }
-            return RedirectToAction("Login");
+            return View("Dashboard", matchedUser);
+
 
         }
 
