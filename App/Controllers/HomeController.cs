@@ -29,21 +29,36 @@ namespace App.Controllers
             return View();
         }
 
+        public IActionResult UserListing()
+        {
+            return View();
+        }
+
+        public IActionResult SignOut()
+        {
+            return RedirectToAction("Login");
+        }
+
         [HttpPost]
         public IActionResult Login(User user)
         {
             var matchedUser = Repository.Users.FirstOrDefault(x => x.Email == user.Email);
             if (matchedUser.Password == user.Password)
             {
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("Dashboard", matchedUser);
 
             }
             return View("Login");
         }
 
-        public IActionResult Dashboard()
+        public IActionResult Dashboard(User matchedUser)
         {
-            return View();
+            if (matchedUser.Email != null)
+            {
+                return View("Dashboard", matchedUser);
+            }
+            return RedirectToAction("Login");
+
         }
 
         [HttpPost]

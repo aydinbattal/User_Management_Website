@@ -1,1 +1,9 @@
+@model App.Models.User;
+
 <h2>Dashboard</h2>
+
+<p>@Model.FullName</p>
+<p>@Model.Email</p>
+
+<a asp-action="UserListing">User Listing</a>
+<a asp-action="SignOut">Sign Out</a>
