@@ -42,18 +42,27 @@ namespace App.Controllers
         [HttpPost]
         public IActionResult Login(User user)
         {
+
+            ModelState.Remove("FullName");
+            ModelState.Remove("PhoneNumber");
+            ModelState.Remove("PasswordConfirmation");
+
+            if (!ModelState.IsValid)
+                return View("Login");
+
             var matchedUser = Repository.Users.FirstOrDefault(x => x.Email == user.Email);
             if (matchedUser.Password == user.Password)
             {
                 return RedirectToAction("Dashboard", matchedUser);
 
             }
+
             return View("Login");
         }
 
         public IActionResult Dashboard(User matchedUser)
         {
-            if (matchedUser.Email == null)
+            if (matchedUser == null)
             {
                 return RedirectToAction("Login");
             }

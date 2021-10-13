@@ -1,8 +1,10 @@
 @model App.Models.User;
 
 <h2>Login</h2>
-
-@* <div class="alert alert-danger" asp-validation-summary="All"></div> *@
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger" asp-validation-summary="All"></div>
+}
 
 <form asp-action="Login" method="POST">
     <div class="form-group">
