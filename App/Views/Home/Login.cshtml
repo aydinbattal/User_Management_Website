@@ -1,21 +1,82 @@
 @model App.Models.User;
 
-<h2>Login</h2>
+
 @if (!ViewData.ModelState.IsValid)
 {
     <div class="alert alert-danger" asp-validation-summary="All"></div>
 }
 
-<form asp-action="Login" method="POST">
-    <div class="form-group">
-        <label asp-for="Email">Email</label>
-        <input asp-for="Email" type="email" class="form-control">
-    </div>
 
-    <div class="form-group">
-        <label asp-for="Password">Password</label>
-        <input asp-for="Password" type="text" class="form-control">
-    </div>
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="col text-center">
+            <h2>Login</h2>
+        </div>
+        <div class="login-signup-outer">
+            <div class="login-signup-inner">
+                <div class="signup-form">
+                    <form asp-action="Login" method="POST">
+                        <div class="form-group">
+                            <label asp-for="Email">Email</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+                                </div>
+                                <div class="input-group-append">
+                                    <input asp-for="Email" type="email" class="form-control">
+                                </div>
+                            </div>
+                        </div>
 
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
+                        @* <div class="form-group">
+                            <label asp-for="Password">Password</label>
+                            <input asp-for="Password" type="text" class="form-control">
+                            </div> *@
+
+                        <div class="form-group">
+                            <label asp-for="Password">Password</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
+                                </div>
+
+                                <div class="input-group-append" id="show_hide_password">
+                                    <input asp-for="Password" type="password" class="form-control">
+                                    <div class="input-group-addon">
+                                        <span class="input-group-text">
+                                            <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col text-center">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+<script>
+    $(document).ready(function () {
+        $("#show_hide_password a").on('click', function (event) {
+            event.preventDefault();
+            if ($('#show_hide_password input').attr("type") == "text") {
+                $('#show_hide_password input').attr('type', 'password');
+                $('#show_hide_password i').addClass("fa-eye-slash");
+                $('#show_hide_password i').removeClass("fa-eye");
+            } else if ($('#show_hide_password input').attr("type") == "password") {
+                $('#show_hide_password input').attr('type', 'text');
+                $('#show_hide_password i').removeClass("fa-eye-slash");
+                $('#show_hide_password i').addClass("fa-eye");
+            }
+        });
+    });
+</script>
+}

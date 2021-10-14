@@ -42,14 +42,16 @@ namespace App.Controllers
         [HttpPost]
         public IActionResult Login(User user)
         {
-
+            //removes the errors that wont be needed on login page
             ModelState.Remove("FullName");
             ModelState.Remove("PhoneNumber");
             ModelState.Remove("PasswordConfirmation");
 
+            //checks if input is valid
             if (!ModelState.IsValid)
                 return View("Login");
 
+            //checks if user credentials are correct, if they are proceeds to dashboard
             var matchedUser = Repository.Users.FirstOrDefault(x => x.Email == user.Email);
             if (matchedUser.Password == user.Password)
             {
@@ -62,6 +64,7 @@ namespace App.Controllers
 
         public IActionResult Dashboard(User matchedUser)
         {
+            //checks if user is logged in or not
             if (matchedUser == null)
             {
                 return RedirectToAction("Login");
@@ -75,6 +78,8 @@ namespace App.Controllers
         public IActionResult SignUp(User newUser)
         {
             //validate the user input
+
+            //checks if user already exists
             foreach (User user in Repository.Users)
             {
                 if (user.Email == newUser.Email)
@@ -85,16 +90,17 @@ namespace App.Controllers
 
             }
 
+            //checks if password and its confirmation matches, if not shows an error
             if (newUser.Password != newUser.PasswordConfirmation)
                 ModelState.AddModelError(string.Empty, "The password and its confirmation should be the same");
 
+            //checks if user input is valid
             if (!ModelState.IsValid)
                 return View("Index");
 
-            //add user to repo
+            //add new user to repository
             Repository.AddUser(newUser);
 
-            //show login page
             return RedirectToAction("Login");
         }
     }
